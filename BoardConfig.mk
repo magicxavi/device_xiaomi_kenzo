@@ -15,9 +15,9 @@
 # limitations under the License.
 #
 
-VENDOR_PATH := device/xiaomi/msm8956-common
+DEVICE_PATH := device/xiaomi/kenzo
 
-TARGET_SPECIFIC_HEADER_PATH := $(VENDOR_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
@@ -161,7 +161,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 
-TARGET_FS_CONFIG_GEN := $(VENDOR_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /mnt/vendor/persist:/persist
@@ -172,8 +172,8 @@ BOARD_ROOT_EXTRA_FOLDERS := \
     /cust
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
-DEVICE_MATRIX_FILE   := $(VENDOR_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # exFat
 TARGET_EXFAT_DRIVER := exfat
@@ -188,7 +188,7 @@ USE_DEVICE_SPECIFIC_LOC_API := true
 TARGET_NO_RPC := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(VENDOR_PATH):libinit_msm
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_msm
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_RECOVERY_DEVICE_MODULES := libinit_msm
 
@@ -209,14 +209,11 @@ TARGET_HAS_NO_WIFI_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 #TARGET_USES_NON_LEGACY_POWERHAL := true
 
-# Properties
-TARGET_SYSTEM_PROP += $(VENDOR_PATH)/system.prop
-
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(VENDOR_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UI_BLANK_UNBLANK_ON_INIT := true
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -235,7 +232,7 @@ TARGET_LD_SHIM_LIBS := \
 # SELinux
 BOARD_SEPOLICY_VERS := 29.0
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
@@ -262,8 +259,28 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/android_touch/doubletap2wake"
 # Enable DRM plugins 64 bit compilation
 TARGET_ENABLE_MEDIADRM_64 := true
 
-# Inherit from the proprietary version
--include vendor/xiaomi/msm8956-common/BoardConfigVendor.mk
-
 BUILD_BROKEN_DUP_RULES := true
 SELINUX_IGNORE_NEVERALLOWS := true
+
+# Assertions
+TARGET_OTA_ASSERT_DEVICE := kate,kenzo
+
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+
+# Filesystem
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 26838785024 # 26838801408 - 16384
+
+# Kernel
+TARGET_KERNEL_CONFIG := lineageos_kenzo_defconfig
+
+# Properties
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
+# Enable real time lockscreen charging current values
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
+
+# inherit from the proprietary version
+-include vendor/xiaomi/kenzo/BoardConfigVendor.mk

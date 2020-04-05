@@ -1,3 +1,29 @@
+# Camera Force HAL1 in these packages
+camera.hal1.packagelist=com.skype.raider,com.google.android.GoogleCamera,com.tencent.mm,com.whatsapp
+
+# Codecs: (PARSER_) AAC AC3 AMR_NB AMR_WB ASF AVI DTS FLV 3GP 3G2 MKV MP2PS MP2TS MP3 OGG QCP WAV FLAC AIFF APE
+mm.enable.qcom_parser=1048575
+persist.mm.enable.prefetch=true
+av.debug.disable.pers.cache=true
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+
+# System prop for RmNet Data
+persist.rmnet.data.enable=true
+persist.data.wda.enable=true
+persist.data.df.dl_mode=5
+persist.data.df.ul_mode=5
+persist.data.df.agg.dl_pkt=10
+persist.data.df.agg.dl_size=4096
+persist.data.df.mux_count=8
+persist.data.df.iwlan_mux=9
+persist.data.df.dev_name=rmnet_usb0
+
+
 # Audio
 af.fast_track_multiplier=1
 vendor.audio_hal.period_size=192
@@ -14,7 +40,6 @@ persist.audio.dirac.speaker=true
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.hw.binder.size_kbyte=1024
-
 ro.vendor.qc.sdk.audio.fluencetype=fluence
 ro.vendor.qc.sdk.audio.ssr=false
 vendor.audio.tunnel.encode=false
@@ -22,6 +47,15 @@ vendor.voice.path.for.pcm.voip=true
 vendor.voice.conc.fallbackpath=deep-buffer
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=false
+audio.offload.disable=1
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
+audio.offload.video=true
+persist.vendor.audio.fluence.audiorec=false
+persist.audio.fluence.spk.mono=true
+persist.vendor.audio.fluence.voicerec=false
+vendor.voice.voip.conc.disabled=true
+audio.offload.multiaac.enable=true
 
 # Bluetooth
 bluetooth.hfp.client=1
@@ -126,17 +160,6 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 
-# Perf
-ro.vendor.extension_library=libqti-perfd-client.so
-
-# QTI Performance
-vendor.enable_prefetch=1 
-vendor.iop.enable_uxe=1
-vendor.iop.enable_prefetch_ofr=1
-vendor.perf.iop_v3.enable=1  
-ro.vendor.at_library=libqti-at.so 
-persist.vendor.qti.games.gt.prof=1
-
 # Radio
 DEVICE_PROVISIONED=1
 ril.subscription.types=RUIM
@@ -161,6 +184,10 @@ persist.vendor.radio.adb_log_on=1
 persist.radio.sw_mbn_update=0
 persist.data.qmi.adb_logmask=0
 persist.sys.fflag.override.settings_network_and_internet_v2=true
+persist.radio.cs_srv_type=1
+persist.radio.force_on_dc=true
+persist.radio.redir_party_num=0
+persist.radio.start_ota_daemon=1
 
 # SurfaceFlinger
 ro.surface_flinger.protected_contents=true

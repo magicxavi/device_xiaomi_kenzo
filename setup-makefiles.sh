@@ -18,6 +18,12 @@
 
 set -e
 
+# Required!
+export DEVICE=kenzo
+export VENDOR=xiaomi
+
+export DEVICE_BRINGUP_YEAR=2016
+
 INITIAL_COPYRIGHT_YEAR=2017
 
 # Load extract_utils and do some sanity checks
@@ -34,7 +40,7 @@ fi
 . "$HELPER"
 
 # Initialize the helper for common
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$ROOT" true
+setup_vendor "$DEVICE" "$VENDOR" "$ROOT" true
 
 # Copyright headers and guards
 write_headers "kenzo hydrogen"
@@ -59,3 +65,5 @@ if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
     # We are done!
     write_footers
 fi
+
+./../../$VENDOR/$DEVICE/setup-makefiles.sh $@

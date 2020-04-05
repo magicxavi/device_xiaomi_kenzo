@@ -90,6 +90,10 @@ on early-boot
 
 on boot
 
+    # Goodix
+    chown system system  /dev/goodix_fp
+    chmod 0644 /dev/goodix_fp
+    
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
@@ -286,6 +290,9 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # Goodix
+    mkdir /data/goodix 0700 system system
+    
     mkdir /data/vendor/misc 01771 system system
 
     # Create directory used for dump collection
@@ -440,6 +447,12 @@ on post-fs-data
     mkdir /data/vendor/perfd 0770 root system
     chmod 2770 /data/vendor/perfd
     rm /data/vendor/perfd/default_values
+
+    #Create PERFD deamon related dirs (old blobs)
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
@@ -722,3 +735,24 @@ service vendor.power_off_alarm /vendor/bin/power_off_alarm
     group system
     disabled
     oneshot
+    
+on property:ro.boot.fpsensor=fpc
+    setprop persist.sys.fp.goodix 0
+    setprop ro.hardware.fingerprint fpc
+
+on property:ro.boot.fpsensor=gdx
+    setprop persist.sys.fp.goodix 1
+    setprop ro.hardware.fingerprint gdx
+
+service gx_fpd /system/bin/gx_fpd
+    class late_start
+    user system
+    group system
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+on property:persist.sys.fp.goodix=0
+    stop gx_fpd
+
+on property:persist.sys.fp.goodix=1
+    start gx_fpd

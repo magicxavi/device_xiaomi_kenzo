@@ -130,7 +130,6 @@ chown -h system /sys/devices/platform/rs300100a7.65536/force_sync
 chown -h system /sys/devices/platform/rs300100a7.65536/sync_sts
 
 setprop sys.post_boot.parsed 1
-setprop vendor.post_boot.parsed 1
 
 panel=`cat /sys/class/graphics/fb0/modes`
 if [ "${panel:5:1}" == "x" ]; then
