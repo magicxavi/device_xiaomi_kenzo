@@ -20,4 +20,6 @@
     <!-- Whether notify user that switch data service -->
     <bool name="confirm_to_switch_data_service">true</bool>
 
+    <!-- Smart Charging -->
+     <bool name="config_supportBatteryHealth">true</bool>
 </resources>
