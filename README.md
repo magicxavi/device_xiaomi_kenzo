@@ -12,6 +12,6 @@ MicroSD | Up to 32GB
 Battery | Non-removable Li-Po 4050 mAh battery
 Display | 1920x1080 pixels, 5.5 inches (~401 ppi pixel density)
 Camera  | Primary: 16 MP, f/2.0, phase detection autofocus, dual-LED (dual tone) flash
-	| Secondary: 5 MP, f/2.0, 1080p
+        | Secondary: 5 MP, f/2.0, 1080p
 
 ![Xiaomi Redmi Note 3](http://cdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-3-1.jpg "Xiaomi Redmi Note 3")
